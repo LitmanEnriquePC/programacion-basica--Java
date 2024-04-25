@@ -14,10 +14,10 @@ public class FunctionPrueba {
             Contraseña = scanner.nextLine();
             
         if (Usuario.equals("System") && (Contraseña.equals("admin123"))) {
-            System.out.print("Inicio de sesion Exitoso");
+            System.out.println("Inicio de sesion Exitoso");
         } else {
-            System.out.print("Incorrect Password");
-            
+            System.out.println("Incorrect Password");
+        
         
         
         }
