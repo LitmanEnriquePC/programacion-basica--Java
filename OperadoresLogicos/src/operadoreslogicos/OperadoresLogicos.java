@@ -1,4 +1,4 @@
-
+//LITMAN ENRIQUE PORTILLO COLQUE
 package operadoreslogicos;
 public class OperadoresLogicos {
     public static void main(String[] args) {
@@ -19,3 +19,4 @@ public class OperadoresLogicos {
     }
     
 }
+

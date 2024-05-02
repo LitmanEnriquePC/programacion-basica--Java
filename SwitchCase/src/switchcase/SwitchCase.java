@@ -1,3 +1,4 @@
+//LITMAN ENRIQUE PORTILLO COLQUE
 package switchcase;
 
 import java.util.Scanner;

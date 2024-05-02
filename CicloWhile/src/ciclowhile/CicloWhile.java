@@ -1,3 +1,4 @@
+//LITMAN ENRIQUE PORTILLO COLQUE
 package ciclowhile;
 
 import java.util.Scanner;
