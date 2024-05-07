@@ -60,6 +60,11 @@ public class CalculadoraSwing extends javax.swing.JFrame {
         btnDivision.setText("/");
 
         btnBorrar.setText("B");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("CE");
 
@@ -211,6 +216,10 @@ public class CalculadoraSwing extends javax.swing.JFrame {
     private void btnSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSumaActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
