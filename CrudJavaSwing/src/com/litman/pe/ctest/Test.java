@@ -36,9 +36,10 @@ public class Test {
     
     public static void main(String[] args) throws SQLException {
         Test t = new Test();
-        //t.insertar();
+        t.insertar();
         //t.modificar();
-        t.eliminar();
+        //t.eliminar();
+        
         
     }
     

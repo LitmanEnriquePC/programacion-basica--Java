@@ -5,6 +5,7 @@ import java.sql.Connection;
 import com.litman.pe.cmodelo.Genero;
 import com.litman.pe.db.Conexion;
 import java.sql.SQLException;
+import javax.swing.JTable;
 
 
 public class GeneroBO {
@@ -54,8 +55,17 @@ public class GeneroBO {
         return mensaje;
     }
     
-    public void ListarGenero(){
-        
+    public void ListarGenero(JTable table){
+        Connection connection = Conexion.getConnection();
+        try {
+            generoDao.ListarGenero(connection, table);
+            connection.close();
+     
+        } catch (SQLException e) {
+            System.out.println("Error al listar Genero"+ e.getMessage());
+
+        } 
+        System.out.println(mensaje);
         
     }
 }

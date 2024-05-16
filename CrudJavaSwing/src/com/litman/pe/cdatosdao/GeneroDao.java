@@ -6,6 +6,11 @@ import java.sql.Connection;
 
 import com.litman.pe.cmodelo.Genero;
 import java.sql.SQLException;
+import javax.swing.JTable;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class GeneroDao {
@@ -65,7 +70,35 @@ public class GeneroDao {
         return mensaje;
     }
     
-    public void ListarGenero(Connection connection){
+    public void ListarGenero(Connection connection, JTable jTable){
+        Statement statement = null;
+        ResultSet resultset = null;
+        DefaultTableModel model;
         
+        String[] columnas = {"ID", "NOMBRE", "ESTADO", "SIGLA", "CODIGO",};
+        model = new DefaultTableModel(null, columnas);
+        String sql = "SELECT * FROM genero "+
+                     "ORDER BY id_genero";
+        
+        String[] datosGenero = new String[5];
+        
+        try {
+            statement = connection.createStatement();
+            resultset = statement.executeQuery(sql);
+            
+            while(resultset.next()) {
+                datosGenero[0] = resultset.getInt("id_genero")+"";
+                datosGenero[1] = resultset.getString("nombre");
+                datosGenero[2] = resultset.getString("estado");
+                datosGenero[3] = resultset.getString("sigla");
+                datosGenero[4] = resultset.getString("codigo");
+                model.addRow(datosGenero);
+            }
+            jTable.setModel(model);
+            
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo mostrar la tabla");
+        }
     }
 }
