@@ -29,9 +29,9 @@ public class Test {
     }
     
     public void eliminar() throws SQLException{
-        genero.setIdGenero(8);
+        genero.setIdGenero(6);
         
-        generoBO.EliminarGenero(8);
+        generoBO.EliminarGenero(6);
     }
     
     public static void main(String[] args) throws SQLException {

@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.litman.pe.cpresentacion;
 
 import com.litman.pe.cmodelo.Genero;
+import com.litman.pe.cmodelo.TipoDocumento;
 import com.litman.pe.cnegocio.GeneroBO;
+import com.litman.pe.cnegocio.TipoDocumentoBO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -19,16 +18,24 @@ public class FrmGenero extends javax.swing.JFrame {
      * Creates new form FrmGenero
      */
     GeneroBO generoBO = new GeneroBO();
+    TipoDocumentoBO tipoDocumentoBO = new TipoDocumentoBO();
     String mensaje;
     String idGenero;
     
     public FrmGenero() {
         initComponents();
         listarGenero();
+        listarTipoDoc();
         
         setTitle("Formulario Genero");
         setLocationRelativeTo(null);
         setResizable(false);
+    }
+    
+    private void listarTipoDoc(){
+        for(TipoDocumento item : tipoDocumentoBO.ListarTipoDocumento()){
+        cbTipoDoc.addItem(item.getIdTipoDocumento() +"_"+item.getNombre());
+        }
     }
     
     private void listarGenero(){
@@ -87,6 +94,8 @@ public class FrmGenero extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnMenuPrincipal = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        cbTipoDoc = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,6 +190,15 @@ public class FrmGenero extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Futura Md BT", 0, 24)); // NOI18N
         jLabel5.setText("FORMULARIO GENERO");
 
+        cbTipoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoDocActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel6.setText("Tipo Documento");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,23 +215,25 @@ public class FrmGenero extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1)
+                                .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addComponent(tfSigla, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnLimpiar)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(btnGuardar))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(rbActivo)
                                     .addGap(18, 18, 18)
-                                    .addComponent(rbInactivo)))
-                            .addComponent(btnMenuPrincipal)
-                            .addComponent(jLabel2))
+                                    .addComponent(rbInactivo))
+                                .addComponent(btnMenuPrincipal)
+                                .addComponent(jLabel2)
+                                .addComponent(cbTipoDoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel6))
                         .addGap(194, 194, 194)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
@@ -247,7 +267,11 @@ public class FrmGenero extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbActivo)
                             .addComponent(rbInactivo))
-                        .addGap(70, 70, 70)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardar)
                             .addComponent(btnLimpiar)))
@@ -318,6 +342,7 @@ public class FrmGenero extends javax.swing.JFrame {
 
     private void tbGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGeneroMouseClicked
         int seleccion = tbGenero.rowAtPoint(evt.getPoint());
+        System.out.println(seleccion);
         idGenero = tbGenero.getValueAt(seleccion, 0)+"";
         tfNombre.setText(tbGenero.getValueAt(seleccion, 1)+"");
         tfSigla.setText(tbGenero.getValueAt(seleccion, 3)+"");
@@ -370,6 +395,10 @@ public class FrmGenero extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void cbTipoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoDocActionPerformed
+        
+    }//GEN-LAST:event_cbTipoDocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,11 +442,13 @@ public class FrmGenero extends javax.swing.JFrame {
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbTipoDoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbActivo;
